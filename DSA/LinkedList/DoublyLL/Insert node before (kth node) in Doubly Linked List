@@ -1,0 +1,61 @@
+📖 Book Note
+
+To insert a node before the Kth node in a DLL, first create the new node. If K == 1, connect the new node before the head and return it as the new head. Otherwise, move current to the Kth node, then connect the new node between current.prev and current by updating four links: newNode.prev, newNode.next, current.prev.next, and current.prev.
+
+Time: O(K) → worst case O(n)
+Auxiliary Space: O(1)
+
+
+
+class Solution {
+    public ListNode insertBeforeKthPosition(ListNode head, int X, int K) {
+
+        // Create the new node that we want to insert.
+        ListNode newNode = new ListNode(X);
+
+        // If the list is empty, there is no Kth node.
+        // Return the new node as the only node.
+        if (head == null) {
+            return newNode;
+        }
+
+        // If K is 1, we have to insert before the current head.
+        // Therefore, the new node becomes the new head.
+        if (K == 1) {
+
+            // New node points forward to the old head.
+            newNode.next = head;
+
+            // Old head points backward to the new node.
+            head.prev = newNode;
+
+            // Return the new head.
+            return newNode;
+        }
+
+        // Start from the head to find the Kth node.
+        ListNode current = head;
+
+        // Move current until it reaches the Kth node.
+        for (int i = 1; i < K; i++) {
+            current = current.next;
+        }
+
+        // The new node comes before the Kth node.
+        // So its next pointer points to the Kth node.
+        newNode.next = current;
+
+        // Its previous pointer points to the node
+        // that was previously before the Kth node.
+        newNode.prev = current.prev;
+
+        // The previous node now points forward to newNode.
+        current.prev.next = newNode;
+
+        // The Kth node now points backward to newNode.
+        current.prev = newNode;
+
+        // Head has not changed because K is greater than 1.
+        return head;
+    }
+}
