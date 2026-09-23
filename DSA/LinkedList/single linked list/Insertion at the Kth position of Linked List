@@ -1,0 +1,41 @@
+Insertion at Kth Position — Book Revision
+
+To insert a node at the kth position, create a new node with value X. If K == 1, connect the new node to the current head using newNode.next = head and return newNode because it becomes the new head. Returning newNode does not return only its value; since newNode.next points to the old head, the complete remaining list is connected and can be traversed. Otherwise, move current to the node just before position K, connect newNode.next = current.next, then connect current.next = newNode, and return the original head.
+
+Time: O(k) — traverse up to position K; worst case O(n).
+Auxiliary Space: O(1) — only pointer variables and the new node are used.
+
+code
+=================================
+
+class Solution {
+    public ListNode insertAtKthPosition(ListNode head, int X, int K) {
+
+        // Create the new node
+        ListNode newNode = new ListNode(X);
+
+        // If inserting at the 1st position,
+        // new node becomes the head
+        if(K == 1){
+            newNode.next = head;
+            return newNode;
+        }
+
+        // Start from the head
+        ListNode current = head;
+
+        // Move current to the node just before position K
+        for(int i = 1; i < K - 1; i++){
+            current = current.next;
+        }
+
+        // Connect new node to the next node
+        newNode.next = current.next;
+
+        // Connect current node to new node
+        current.next = newNode;
+
+        // Return the original head
+        return head;
+    }
+}
