@@ -1,0 +1,60 @@
+Convert Array to Doubly Linked List — Quick Revision
+
+Create the first array element as the head. Then traverse from index 1, create a new node for each element, and connect both directions using current.next = newNode and newNode.prev = current. Finally, return head.
+
+Time: O(n)
+Auxiliary Space: O(n) — n new linked-list nodes are created.
+
+code
+===================
+
+/*
+Definition for a Node.
+
+class ListNode {
+    public int data;
+    public ListNode prev;
+    public ListNode next;
+
+    public ListNode();
+    public ListNode(int data);
+    public ListNode(int data, ListNode prev, ListNode next);
+};
+*/
+
+class Solution {
+
+    public ListNode arrayToDoublyLinkedList(List<Integer> arr) {
+
+        // If the array/list is empty, return null
+        if (arr.size() == 0) {
+            return null;
+        }
+
+        // Create the first node
+        // arr.get(0) gives the first element
+        ListNode head = new ListNode(arr.get(0));
+
+        // Current points to the last node created
+        ListNode current = head;
+
+        // Start from the second element
+        for (int i = 1; i < arr.size(); i++) {
+
+            // Create a new node using the current array element
+            ListNode newNode = new ListNode(arr.get(i));
+
+            // Connect current node to the new node
+            current.next = newNode;
+
+            // Connect new node back to the current node
+            newNode.prev = current;
+
+            // Move current to the newly created node
+            current = newNode;
+        }
+
+        // Return the first node of the doubly linked list
+        return head;
+    }
+}
