@@ -1,0 +1,48 @@
+Quick Book Revision
+
+When the node to delete is already given, no traversal is needed. Connect its previous node to its next node using node.prev.next = node.next, and connect its next node back using node.next.prev = node.prev. Handle the first/last node using null checks, then set node.prev and node.next to null to completely disconnect it.
+
+Time: O(1)
+Auxiliary Space: O(1)
+
+
+
+/*
+Definition for a Node.
+
+class ListNode {
+    public int data;
+    public ListNode prev;
+    public ListNode next;
+
+    public ListNode();
+    public ListNode(int data);
+    public ListNode(int data, ListNode prev, ListNode next);
+};
+*/
+
+class Solution {
+    public void deleteNode(ListNode node) {
+
+        // If the node is null, there is nothing to delete
+        if (node == null) {
+            return;
+        }
+
+        // If the node has a previous node,
+        // connect the previous node to the next node
+        if (node.prev != null) {
+            node.prev.next = node.next;
+        }
+
+        // If the node has a next node,
+        // connect the next node back to the previous node
+        if (node.next != null) {
+            node.next.prev = node.prev;
+        }
+
+        // Completely disconnect the deleted node
+        node.prev = null;
+        node.next = null;
+    }
+}
