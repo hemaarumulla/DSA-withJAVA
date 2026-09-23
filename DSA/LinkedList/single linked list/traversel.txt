@@ -1,1 +1,68 @@
+import java.util.*;
 
+// Definition of a singly linked list node
+class ListNode {
+
+    // Stores the value of the current node
+    public int data;
+
+    // Stores the reference/address of the next node
+    public ListNode next;
+
+    // Constructor 1
+    // Creates a node with default values
+    ListNode() {
+        data = 0;
+        next = null;
+    }
+
+    // Constructor 2
+    // Creates a node with the given value
+    ListNode(int x) {
+        data = x;
+        next = null;
+    }
+
+    // Constructor 3
+    // Creates a node with a value
+    // and connects it to the next node
+    ListNode(int x, ListNode next) {
+        data = x;
+        this.next = next;
+    }
+}
+
+
+class Solution {
+
+    public List<Integer> LLTraversal(ListNode head) {
+
+        // Create an empty list to store node values
+        List<Integer> result = new ArrayList<>();
+
+        // Start travelling from the first node
+        // head points to the first node
+        ListNode current = head;
+
+        // Continue until current becomes null
+        while (current != null) {
+
+            // Get the value of the current node
+            // Example: current is at 0 → add 0
+            result.add(current.data);
+
+            // Move current to the next node
+            // Example: 0 → 2
+            // current.next points to the node containing 2
+            current = current.next;
+        }
+
+        // Return all node values
+        return result;
+    }
+}
+
+
+Time Complexity: O(n)
+Space Complexity: O(n) because of the returned result list.
+Auxiliary Space: O(1) excluding the output.
