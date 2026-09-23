@@ -1,0 +1,61 @@
+Insertion at Tail — Book Revision
+
+To insert a node at the tail, create a new node with value X. If the list is empty, the new node becomes the head. Otherwise, start from head and traverse using current = current.next until current.next == null, meaning current is the last node. Then connect the new node using current.next = newNode. Finally, return the original head.
+
+Key line:
+
+current.next = newNode;
+
+Time: O(n) — traverse to the last node.
+Auxiliary Space: O(1) — only one pointer current is used.
+
+code
+=======================================
+
+class ListNode {
+    public int data;
+    public ListNode next;
+
+    ListNode() {
+        data = 0;
+        next = null;
+    }
+
+    ListNode(int x) {
+        data = x;
+        next = null;
+    }
+
+    ListNode(int x, ListNode next) {
+        data = x;
+        this.next = next;
+    }
+}
+
+class Solution {
+    public ListNode insertAtTail(ListNode head, int X) {
+
+        // Create a new node with value X
+        ListNode newNode = new ListNode(X);
+
+        // If the list is empty,
+        // the new node becomes the head
+        if (head == null) {
+            return newNode;
+        }
+
+        // Start from the head
+        ListNode current = head;
+
+        // Move current until it reaches the last node
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        // Connect the last node to the new node
+        current.next = newNode;
+
+        // Return the original head
+        return head;
+    }
+}
