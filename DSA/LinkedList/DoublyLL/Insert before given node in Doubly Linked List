@@ -1,0 +1,30 @@
+class Solution {
+    public void insertBeforeNode(ListNode node, int X) {
+
+        // Create the new node with the given value.
+        ListNode newNode = new ListNode(X);
+
+        // The new node should come before the given node,
+        // so it points forward to the given node.
+        newNode.next = node;
+
+        // The new node should point backward to the node
+        // that was previously before the given node.
+        newNode.prev = node.prev;
+
+        // The previous node now needs to point forward
+        // to the new node instead of directly to node.
+        node.prev.next = newNode;
+
+        // The given node now needs to point backward
+        // to the new node.
+        node.prev = newNode;
+    }
+}
+
+📖 Book Note
+
+When the node reference is already given, no traversal is needed. Create the new node and insert it between node.prev and node: set newNode.prev = node.prev, newNode.next = node, node.prev.next = newNode, and node.prev = newNode. Since the problem guarantees that the given node is not the head, node.prev is available.
+
+Time: O(1)
+Auxiliary Space: O(1)
