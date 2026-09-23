@@ -1,0 +1,83 @@
+Insert Before Value X — Book Revision
+
+To insert val before the node containing value X, first check if the list is empty. If head.data == X, create a new node, connect newNode.next = head, and return newNode because it becomes the new head. Otherwise, traverse the list using current until current.next contains X or current.next == null. If X is found, insert the new node between current and current.next using newNode.next = current.next and current.next = newNode. If X is not found, leave the list unchanged.
+
+Time: O(n) — traverse the list in the worst case.
+Auxiliary Space: O(1) — only pointers and one new node are used.
+
+code
+===============================================
+
+/*
+Definition of singly linked list:
+
+class ListNode {
+    public int data;
+    public ListNode next;
+
+    ListNode() {
+        data = 0;
+        next = null;
+    }
+
+    ListNode(int x) {
+        data = x;
+        next = null;
+    }
+
+    ListNode(int x, ListNode next) {
+        data = x;
+        this.next = next;
+    }
+}
+*/
+
+class Solution {
+    public ListNode insertBeforeValueX(ListNode head, int X, int val) {
+
+        // If the linked list is empty,
+        // there is no node with value X to insert before.
+        if (head == null) {
+            return head;
+        }
+
+        // If X is present in the first node,
+        // the new node becomes the new head.
+        if (head.data == X) {
+            ListNode newNode = new ListNode(val);
+
+            // New node points to the old head
+            newNode.next = head;
+
+            // Return new node as the new head
+            return newNode;
+        }
+
+        // Start traversal from the head
+        ListNode current = head;
+
+        // Move current until the next node contains X
+        // or we reach the end of the list.
+        while (current.next != null && current.next.data != X) {
+
+            // Move current one node forward
+            current = current.next;
+        }
+
+        // If X was found
+        if (current.next != null) {
+
+            // Create the new node
+            ListNode newNode = new ListNode(val);
+
+            // New node points to the node containing X
+            newNode.next = current.next;
+
+            // Current node now points to the new node
+            current.next = newNode;
+        }
+
+        // Return the original head
+        return head;
+    }
+}
