@@ -1,0 +1,53 @@
+/*
+Definition for a Node.
+
+class ListNode {
+    public int data;
+    public ListNode prev;
+    public ListNode next;
+
+    public ListNode();
+    public ListNode(int data);
+    public ListNode(int data, ListNode prev, ListNode next);
+};
+*/
+
+class Solution {
+    public ListNode deleteTail(ListNode head) {
+
+        // Case 1: Empty list
+        if (head == null) {
+            return null;
+        }
+
+        // Case 2: Only one node
+        if (head.next == null) {
+            return null;
+        }
+
+        // Start from the head
+        ListNode current = head;
+
+        // Traverse until current reaches the last node
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        // current is now the tail
+        // Move to the previous node
+        current.prev.next = null;
+
+        // Disconnect the deleted tail from the list
+        current.prev = null;
+
+        // Return the original head
+        return head;
+    }
+}
+
+Quick Book Revision
+
+To delete the tail of a doubly linked list, handle the empty and single-node cases first. Traverse to the last node using current.next != null. Once at the tail, use current.prev.next = null to make the previous node the new tail, then set current.prev = null to disconnect the deleted node. Return the original head.
+
+Time: O(n) — traverse to the tail.
+Auxiliary Space: O(1) — only one pointer is used.
