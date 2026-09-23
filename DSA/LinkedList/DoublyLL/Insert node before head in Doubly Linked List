@@ -1,0 +1,27 @@
+class Solution {
+    public ListNode insertBeforeHead(ListNode head, int data) {
+
+        // Create a new node with the given data.
+        ListNode newNode = new ListNode(data);
+
+        // The new node comes before the old head,
+        // so newNode.next points to the old head.
+        newNode.next = head;
+
+        // If the list is not empty,
+        // make the old head point back to the new node.
+        if (head != null) {
+            head.prev = newNode;
+        }
+
+        // The new node is now the first node,
+        // so it becomes the new head.
+        return newNode;
+    }
+}
+
+
+To insert a node before the head of a doubly linked list, create a new node, connect newNode.next to the old head, and if the old head exists, connect head.prev back to the new node. Finally, return newNode because it becomes the new head. This also works when the list is empty because newNode.next simply becomes null.
+
+Time: O(1)
+Auxiliary Space: O(1)
