@@ -1,0 +1,49 @@
+Book Revision
+
+To search for a key, start current at head and traverse the list while current != null. At each node, compare current.val with key. If they are equal, return true; otherwise move to the next node using current = current.next. If current becomes null, the key is not present, so return false.
+
+Time: O(n)
+Auxiliary Space: O(1)
+
+code
+================================
+
+/*
+Definition of ListNode
+
+class ListNode {
+    int val;              // Stores the value of the current node
+    ListNode next;        // Stores the reference to the next node
+
+    ListNode(int value) { // Constructor to create a node
+        this.val = value; // Store the given value in the node
+        this.next = null; // Initially, this node points to nothing
+    }
+}
+*/
+
+class Solution {
+
+    public boolean searchKey(ListNode head, int key) {
+
+        // Start traversal from the first node (head)
+        ListNode current = head;
+
+        // Continue traversing while current points to a node
+        while (current != null) {
+
+            // Check whether the current node's value equals the key
+            if (current.val == key) {
+
+                // Key is found, so return true immediately
+                return true;
+            }
+
+            // Move current to the next node
+            current = current.next;
+        }
+
+        // We reached the end without finding the key
+        return false;
+    }
+}
