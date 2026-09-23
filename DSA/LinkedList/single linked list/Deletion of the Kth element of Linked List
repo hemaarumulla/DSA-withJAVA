@@ -1,0 +1,63 @@
+Delete Kth Node — Revision
+
+To delete the kth node of a singly linked list, first handle the edge cases: if the list is empty, return null; if k == 1, move head to head.next because the head itself must be deleted. Otherwise, start a current pointer at head and move it to the node just before the kth node. Then delete the kth node by setting current.next = current.next.next, which skips the kth node and connects the previous node directly to the next node. Finally, return head.
+
+Time: O(n) — we may traverse the list up to the kth node.
+Auxiliary Space: O(1) — only the current pointer is used.
+
+CODE:
+======================================
+
+import java.util.*;
+
+class ListNode {
+    public int data;
+    public ListNode next;
+
+    ListNode() {
+        data = 0;
+        next = null;
+    }
+
+    ListNode(int x) {
+        data = x;
+        next = null;
+    }
+
+    ListNode(int x, ListNode next) {
+        data = x;
+        this.next = next;
+    }
+}
+
+class Solution {
+    public ListNode deleteKthNode(ListNode head, int k) {
+
+        // If the list is empty
+        if (head == null) {
+            return null;
+        }
+
+        // If k = 1, delete the head node
+        if (k == 1) {
+            head = head.next;
+            return head;
+        }
+
+        // Start from the head
+        ListNode current = head;
+
+        // Move current to the node just before the kth node
+        for (int i = 1; i < k - 1; i++) {
+            current = current.next;
+        }
+
+        // Delete the kth node
+        // current -> kth node -> next node
+        // current -> next node
+        current.next = current.next.next;
+
+        // Return the head of the modified list
+        return head;
+    }
+}
