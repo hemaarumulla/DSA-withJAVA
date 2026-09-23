@@ -1,0 +1,80 @@
+import java.util.*;
+
+// Definition of singly linked list
+class ListNode {
+
+    // Stores the value of the node
+    public int data;
+
+    // Points to the next node
+    public ListNode next;
+
+    // Default constructor
+    ListNode() {
+        data = 0;
+        next = null;
+    }
+
+    // Constructor to create a node with data
+    ListNode(int x) {
+        data = x;
+        next = null;
+    }
+
+    // Constructor to create a node with data
+    // and connect it to the next node
+    ListNode(int x, ListNode next) {
+        data = x;
+        this.next = next;
+    }
+}
+
+
+class Solution {
+
+    public ListNode deleteHead(ListNode head) {
+
+        // If the list is empty,
+        // there is no head to delete
+        if (head == null) {
+            return null;
+        }
+
+        /*
+            Before deletion:
+
+            head
+             ↓
+            [7] → [8] → null
+
+            head.next points to [8]
+        */
+
+        // Move head to the next node
+        head = head.next;
+
+        /*
+            After deletion:
+
+            head
+             ↓
+            [8] → null
+
+            The old [7] node is no longer
+            part of the linked list.
+        */
+
+        // Return the new head
+        return head;
+    }
+}
+
+Time = O(1) ✅
+
+💾 Auxiliary Space: O(1)
+
+We only use the existing head reference.
+
+No new array, list, or extra nodes are created.
+
+Auxiliary Space = O(1) ✅
