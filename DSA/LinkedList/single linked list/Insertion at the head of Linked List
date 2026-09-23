@@ -1,0 +1,48 @@
+Insertion at Head — Revision
+
+To insert a node at the head of a singly linked list, create a new node with value X, make the new node point to the current head using newNode.next = head, then update head to newNode and return head. This works for both a non-empty and an empty list because if head == null, newNode.next simply becomes null.
+
+Time: O(1) — only a few pointer operations are performed.
+Auxiliary Space: O(1) — only one new node is created.
+
+
+code
+======================================
+import java.util.*;
+
+class ListNode {
+    public int data;
+    public ListNode next;
+
+    ListNode() {
+        data = 0;
+        next = null;
+    }
+
+    ListNode(int x) {
+        data = x;
+        next = null;
+    }
+
+    ListNode(int x, ListNode next) {
+        data = x;
+        this.next = next;
+    }
+}
+
+class Solution {
+    public ListNode insertAtHead(ListNode head, int X) {
+
+        // Create a new node with value X
+        ListNode newNode = new ListNode(X);
+
+        // Connect the new node to the old head
+        newNode.next = head;
+
+        // Make the new node the new head
+        head = newNode;
+
+        // Return the new head
+        return head;
+    }
+}
