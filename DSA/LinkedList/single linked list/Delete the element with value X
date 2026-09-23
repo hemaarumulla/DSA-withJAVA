@@ -1,0 +1,64 @@
+Quick revision
+
+To delete a node with value X, first check if the list is empty. If the head contains X, move head to head.next. Otherwise, use current to find the node before the node containing X. When found, skip that node using current.next = current.next.next. If X is not present, the list remains unchanged. Finally, return head.
+
+Time: O(n) — in the worst case, we traverse the entire list.
+Auxiliary Space: O(1) — only one pointer current is used.
+
+code:
+=====================================
+
+
+import java.util.*;
+
+class ListNode {
+    public int data;
+    public ListNode next;
+
+    ListNode() {
+        data = 0;
+        next = null;
+    }
+
+    ListNode(int x) {
+        data = x;
+        next = null;
+    }
+
+    ListNode(int x, ListNode next) {
+        data = x;
+        this.next = next;
+    }
+}
+
+class Solution {
+    public ListNode deleteNodeWithValueX(ListNode head, int X) {
+
+        // If the list is empty
+        if (head == null) {
+            return null;
+        }
+
+        // If the head contains X, delete the head
+        if (head.data == X) {
+            head = head.next;
+            return head;
+        }
+
+        // Start from the head
+        ListNode current = head;
+
+        // Find the node just before the node containing X
+        while (current.next != null && current.next.data != X) {
+            current = current.next;
+        }
+
+        // If X was found, delete that node
+        if (current.next != null) {
+            current.next = current.next.next;
+        }
+
+        // Return the head of the modified list
+        return head;
+    }
+}
