@@ -1,0 +1,71 @@
+Quick Book Revision
+
+To delete the kth node of a doubly linked list, first handle the empty list and K == 1 (head) cases. Otherwise, traverse to the kth node. Connect its previous node to its next node using current.prev.next = current.next, and connect its next node back using current.next.prev = current.prev. Finally, disconnect the deleted node by setting its prev and next to null, then return head.
+
+Time: O(k) — traverse up to the kth node; worst case O(n).
+Auxiliary Space: O(1).
+
+
+
+/*
+Definition for a Node.
+
+class ListNode {
+    public int data;
+    public ListNode prev;
+    public ListNode next;
+
+    public ListNode();
+    public ListNode(int data);
+    public ListNode(int data, ListNode prev, ListNode next);
+};
+*/
+
+class Solution {
+    public ListNode deleteKthElement(ListNode head, int K) {
+
+        // Case 1: Empty list
+        if (head == null) {
+            return null;
+        }
+
+        // Case 2: K = 1 means delete the head
+        if (K == 1) {
+            head = head.next;
+
+            // If a new head exists, remove its backward connection
+            if (head != null) {
+                head.prev = null;
+            }
+
+            return head;
+        }
+
+        // Start traversal from the head
+        ListNode current = head;
+
+        // Move current to the Kth node
+        for (int i = 1; i < K; i++) {
+            current = current.next;
+        }
+
+        // current is now the Kth node
+
+        // Connect the previous node to the next node
+        if (current.prev != null) {
+            current.prev.next = current.next;
+        }
+
+        // Connect the next node back to the previous node
+        if (current.next != null) {
+            current.next.prev = current.prev;
+        }
+
+        // Completely disconnect the deleted node
+        current.prev = null;
+        current.next = null;
+
+        // Return the head of the modified list
+        return head;
+    }
+}
