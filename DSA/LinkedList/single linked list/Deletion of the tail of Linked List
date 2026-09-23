@@ -1,0 +1,109 @@
+import java.util.*;
+
+// Definition of singly linked list
+class ListNode {
+
+    // Stores the value of the current node
+    public int data;
+
+    // Points to the next node
+    public ListNode next;
+
+    // Default constructor
+    ListNode() {
+        data = 0;
+        next = null;
+    }
+
+    // Constructor to create a node with data
+    ListNode(int x) {
+        data = x;
+        next = null;
+    }
+
+    // Constructor to create a node with data
+    // and connect it to the next node
+    ListNode(int x, ListNode next) {
+        data = x;
+        this.next = next;
+    }
+}
+
+
+class Solution {
+
+    public ListNode deleteTail(ListNode head) {
+
+        // Case 1: If the list is empty
+        if (head == null) {
+            return null;
+        }
+
+        // Case 2: If there is only one node
+        // After deleting it, the list becomes empty
+        if (head.next == null) {
+            return null;
+        }
+
+        // Start travelling from the first node
+        ListNode current = head;
+
+        /*
+            Example:
+
+            head
+             ↓
+            [7] → [8] → [10] → null
+
+            current starts at 7
+        */
+
+        // Travel until current reaches the second-last node
+        while (current.next.next != null) {
+
+            // Move current to the next node
+            current = current.next;
+        }
+
+        /*
+            For:
+
+            [7] → [8] → [10] → null
+
+            current finally becomes:
+
+                   current
+                      ↓
+            [7] → [8] → [10] → null
+
+            Here current = 8
+
+            current.next = 10 (the tail)
+        */
+
+        // Remove the last node
+        // The second-last node now points to null
+        current.next = null;
+
+        /*
+            After deletion:
+
+            head
+             ↓
+            [7] → [8] → null
+
+            The node [10] is no longer part
+            of the linked list.
+        */
+
+        // Return the original head
+        return head;
+    }
+}
+
+Delete Tail of Linked List — Revision
+
+To delete the last node of a singly linked list, first handle the edge cases: if the list is empty or has only one node, return null. Otherwise, start a current pointer at head and move it until it reaches the second-last node using current.next.next != null. Then set current.next = null to remove the last node. Finally, return head, because the first node of the remaining linked list is still the same.
+
+Time: O(n) — we may traverse the entire list.
+Auxiliary Space: O(1) — only one pointer current is used.
