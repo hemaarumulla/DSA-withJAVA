@@ -1,0 +1,60 @@
+📖 Book Note
+
+To insert a node before the tail of a DLL, first handle the empty and single-node cases. If there is one node, the new node becomes the new head and is connected before the old head/tail. Otherwise, traverse to the tail and insert the new node between tail.prev and tail by updating four links: newNode.next, newNode.prev, tail.prev.next, and tail.prev.
+
+Time: O(n)
+Auxiliary Space: O(1)
+
+
+
+
+class Solution {
+    public ListNode insertBeforeTail(ListNode head, int X) {
+
+        // Create the new node.
+        ListNode newNode = new ListNode(X);
+
+        // If the list is empty, there is no tail.
+        if (head == null) {
+            return newNode;
+        }
+
+        // If there is only one node,
+        // that node is both head and tail.
+        if (head.next == null) {
+
+            // New node comes before the old head/tail.
+            newNode.next = head;
+
+            // Old head/tail points back to new node.
+            head.prev = newNode;
+
+            // New node becomes the new head.
+            return newNode;
+        }
+
+        // Start from head and move to the tail.
+        ListNode current = head;
+
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        // current is now the old tail.
+        // The new node should come before current.
+        newNode.next = current;
+
+        // The new node's previous node is
+        // the node that was before the old tail.
+        newNode.prev = current.prev;
+
+        // Connect the previous node forward to newNode.
+        current.prev.next = newNode;
+
+        // Connect the old tail backward to newNode.
+        current.prev = newNode;
+
+        // Head has not changed for a multi-node list.
+        return head;
+    }
+}
