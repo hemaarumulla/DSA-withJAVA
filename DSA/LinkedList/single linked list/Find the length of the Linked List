@@ -1,0 +1,30 @@
+class Solution {
+    public int getLength(ListNode head) {
+
+        // Counter to store the number of nodes
+        int count = 0;
+
+        // Start traversal from the head
+        ListNode current = head;
+
+        // Traverse until the end of the linked list
+        while (current != null) {
+
+            // Count the current node
+            count++;
+
+            // Move to the next node
+            current = current.next;
+        }
+
+        // Return the total number of nodes
+        return count;
+    }
+}
+
+Quick explanation
+
+Start from head and traverse every node using current = current.next. For every node visited, increment count. When current becomes null, the traversal is complete, so return count.
+
+Time: O(n) — every node is visited once.
+Auxiliary Space: O(1) — only count and current are used.
