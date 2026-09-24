@@ -1,0 +1,43 @@
+class Solution {
+    public ListNode reverseDLL(ListNode head) {
+
+        // If the list is empty or has only one node,
+        // there is nothing to reverse.
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Start traversal from the head.
+        ListNode current = head;
+
+        // This will store the new head (old tail).
+        ListNode newHead = null;
+
+        // Traverse through every node.
+        while (current != null) {
+
+            // Save the old previous pointer
+            // before changing it.
+            ListNode temp = current.prev;
+
+            // Swap prev and next pointers.
+            current.prev = current.next;
+            current.next = temp;
+
+            // The current node becomes the latest
+            // possible new head.
+            newHead = current;
+
+            // Move to the next node of the ORIGINAL list.
+            // After swapping, the old next node is now current.prev.
+            current = current.prev;
+        }
+
+        // The old tail is now the new head.
+        return newHead;
+    }
+}
+
+
+Time: O(n)
+Auxiliary Space: O(1)
